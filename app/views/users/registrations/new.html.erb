@@ -1,0 +1,55 @@
+<%# @country.all.inspect %>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<body style="background-color:#D5DBDB">
+ <div class="bg-img">
+  <form method="post">
+  <div class="form-group">
+<h2>Sign up</h2>
+</div>
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
+
+  <div class="form-group">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :password %>
+    <% if @minimum_password_length %>
+    <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <% end %><br />
+    <%= f.password_field :password, autocomplete: "new-password" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+  </div>
+  <div class="form-group">
+   <%= f.label :select_country %>
+   <%= select_tag "country", options_from_collection_for_select(@country, 'id', 'name') %>
+   <%# f.select :country, @country.select{ |c| [ c.name, c.id ] }, include_blank: true %>
+  </div>
+  <div class="form-group">
+   <%= f.label :select_state %>
+   <%= select_tag "state", options_from_collection_for_select(@state, 'id', 'name') %>
+   <%# select_tag "state", options_for_select(@state.select{|s| [s.name, s.id]}) %>
+  </div>
+  <div class="form-group">
+   <%= f.label :select_city %>
+   <%= select_tag "city", options_from_collection_for_select(@city, 'id', 'name') %>
+   <%# select_tag "city", options_for_select(@city.select{|c| [c.name, c.id]}) %>
+   <%# f.select :city, @city.select{ |c| [ c.name, c.id ] }, include_blank: true %><%# f.select :city, @city.select{ |c| [ c.name, c.id ] }, include_blank: true %>
+  </div>
+  <div class="form-group">
+  <div class="actions">
+    <%= f.submit "Sign up" %>
+  </div>
+</div>
+<% end %>
+
+<%= render "users/shared/links" %>
